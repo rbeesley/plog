@@ -61,8 +61,11 @@ namespace plog
                     break;
 
                 case debug:
-                case verbose:
                     SetConsoleTextAttribute(this->m_outputHandle, static_cast<WORD>(foreground::kGreen | foreground::kBlue | foreground::kIntensity | (m_originalAttr & 0xf0))); // cyan
+                    break;
+
+                case verbose:
+                    SetConsoleTextAttribute(this->m_outputHandle, static_cast<WORD>(foreground::kIntensity | (m_originalAttr & 0xf0))); // gray
                     break;
 #else
                 case fatal:
@@ -78,8 +81,11 @@ namespace plog
                     break;
 
                 case debug:
-                case verbose:
                     this->m_outputStream << "\x1B[96m"; // cyan
+                    break;
+
+                case verbose:
+                    this->m_outputStream << "\x1B[90m"; // cyan
                     break;
 #endif
                 default:
